@@ -60,6 +60,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body { min-height: 100vh; overflow-x: hidden; }
+html { overflow-x: hidden; }
   ::selection { background: var(--accent); color: #fbf7f0; }
 
   /* ── Layout ── */
@@ -656,12 +657,13 @@
   .timeline {
     grid-area: timeline; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     border-top: 1px solid rgba(42,36,29,.10);
-    padding: 14px 36px 16px; display: flex; align-items: center; overflow-x: auto;
+    padding: 8px 36px 10px; display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
   }
+  .timeline::-webkit-scrollbar { display: none; }
   body.theme-dark .timeline { border-top-color: rgba(255,255,255,.06); }
   .tl-label { font-family: var(--font); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; font-weight: 600; }
-  .tl-track { position: relative; flex: 1; height: 58px; min-width: 600px; padding: 0 24px; }
-  .tl-line { position: absolute; left: 24px; right: 24px; top: 29px; height: 1px; background: rgba(42,36,29,.20); }
+  .tl-track { position: relative; flex: 1; height: 50px; min-width: 600px; padding: 0 24px; }
+  .tl-line { position: absolute; left: 24px; right: 24px; top: 25px; height: 1px; background: rgba(42,36,29,.20); }
   body.theme-dark .tl-line { background: rgba(255,255,255,.16); }
   .tl-tick-wrap {
     position: absolute; top: 15px;
@@ -690,9 +692,7 @@
     transform: translateX(-50%) translateY(-4px);
     transition: opacity .18s var(--ease-out), transform .18s var(--ease-out);
   }
-  .tl-tick-wrap:hover .tl-tooltip {
-    opacity: 1; transform: translateX(-50%) translateY(0);
-  }
+    .tl-tick-wrap:hover .tl-tooltip { opacity: 0; }
   .tl-tooltip {
     position: absolute; left: 50%; bottom: calc(100% + 6px);
     transform: translateX(-50%);
@@ -920,7 +920,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     animateCount(document.getElementById('sc-years'), 30, 1200);
     animateCount(document.getElementById('sc-orgs'), 10, 900);
-    animateCount(document.getElementById('sc-places'), 36, 1400);
+    animateCount(document.getElementById('sc-places'), 33, 1400);
   }, 800);
 });
 function enterSite() {
@@ -967,56 +967,56 @@ const ORGS = [
     places: [
       { id: 1, year: '1996', period: '1996.05 — 1997.08', name: '진석타워',
         photos: [{src:'https://lh3.googleusercontent.com/d/1qMz7ca-ptu6YQG79PI-iByFshR2UBJnH',caption:'1996.05 법인 창립 개원식'},{src:'https://lh3.googleusercontent.com/d/1VXQt__ozZ-TH30oAgRsxNiW-prxWXKBY',caption:'1996.12 1가구 1봉사 시민캠페인'}],
-        addr: '대구 중구 진석타워 (위치 확인 중)',
-        lat: 35.8694, lng: 128.5946,
+        addr: '대구 중구 동덕로 115',
+        lat: 35.8651, lng: 128.6027,
         story: ['1996년 5월, 진석타워에서 법인의 첫 문을 열었다. 1기 이사장 윤혜승 박사, 원장 윤욱 박사, 부원장 이성록이 취임하며 회원 30명, 예산 1억 원 규모로 출발했다.', '개원 당일 바로 자원봉사지도자 아카데미를 열었고, 두 달 뒤 소식지 『제4의 물결』을 창간하며 사업의 첫 발을 뗐다.'],
         miles: [['1996.05','법인 창립 개원식 · 초대 이사장 윤혜승 박사 취임'],['1996.05','제1차 자원봉사지도자 아카데미'],['1996.06','청소년 자원봉사 순회교육'],['1996.07','소식지 『제4의 물결』 창간'],['1996.12','\'1가구 1봉사\' 시민캠페인']]
       },
       { id: 2, year: '1997', period: '1997.09 — 2000.03', name: '두류동', shortName: '두류동',
         photos: [{src:'https://lh3.googleusercontent.com/d/1rsp24txybeKIhMNJbp9Y6biGZrHoM7Ni',caption:'1998.05 청소년 자원봉사 순회교육'}],
         addr: '대구 달서구 두류2동 145-1 (아리랑식당 2층)',
-        lat: 35.8530, lng: 128.5524,
+        lat: 35.8556, lng: 128.5605,
         story: ['보증금 500만 원, 월세 25만 원의 13평 사무실로 이전했다. 재정난 속에서도 청소년 자원봉사 사업을 본격화하며 기반을 다졌다.'],
         miles: [['1998.05','제1회 비산날뫼터 청소년자원봉사학교']]
       },
       { id: 3, year: '2000', period: '2000.04 — 2002', name: '동인동', shortName: '동인동',
         addr: '대구 중구 동인2가 62-5 (사무실 2층)',
-        lat: 35.8716, lng: 128.6021,
+        lat: 35.8735, lng: 128.6016,
         story: ['중구 동인동으로 이전하며 쪽방·노숙 사업과 맞닿는 새로운 국면이 시작됐다. 2기 이사장 윤욱 박사, 원장 한재흥 목사가 취임하며 조직이 재정비됐다.', '이 시기 쪽방상담소와 동구자원봉사센터 수탁이 확정되며 자원봉사 중심에서 복지 실천 조직으로 전환하는 결정적 분기점이 됐다.'],
         miles: [['2000.05','제2기 이사장 윤욱 박사 취임'],['2001.01','쪽방상담소·동구자원봉사센터 수탁 심의 확정']]
       },
       { id: 4, year: '2002', period: '2002 — 2003.05', name: '팔공정보문화센터', shortName: '팔공정보문화센터',
         photos: [{src:'https://lh3.googleusercontent.com/d/1c9Um_cK4g7gZYmippQ8rMtJRXfyD9xfU',caption:'2002.12 첫 후원의밤 (궁전뷔페호프)'},{src:'https://lh3.googleusercontent.com/d/1TANlRtPdvpU3IuoBXWUwqemqQ51KbCE7',caption:'2003.08 법인 여름 회원 수련회'}],
         addr: '대구 동구 효목2동 400-1 (팔공정보문화센터)',
-        lat: 35.8762, lng: 128.6296,
+        lat: 35.8751, lng: 128.6345,
         story: ['동구 팔공정보문화센터로 이전하며 복지 실천 조직으로의 전환이 본격화됐다. \'촌놈들이 일구어가는 복지공동체\'라는 핵심 가치가 이 시기에 다듬어졌다.'],
         miles: [['2002.12','제1회 후원의 밤 (궁전뷔페호프)'],['2003.01','팔공산 아카데미하우스 직원 수련회']]
       },
       { id: 5, year: '2003', period: '2003.06 — 2005.05', name: '비산동', shortName: '비산동',
         photos: [{src:'https://lh3.googleusercontent.com/d/1X9aiWxPPAfOHVbZvNSzTSmBxLkbONvnv',caption:'2004.08 법인 여름연수 촌놈들의 우주찾기'},{src:'https://lh3.googleusercontent.com/d/11hP-eR_wGsvU6-73cWV1Ya4pIOe_XteU',caption:'2004.12 사랑의 연탄나눔 첫 연탄배달'}],
         addr: '대구 서구 비산5동 1095-2 (개미식당 2층)',
-        lat: 35.8809, lng: 128.5605,
+        lat: 35.8698, lng: 128.5743,
         story: ['비산동으로 이전한 이 시기, 사업 영역이 크게 넓어졌다. 2005년 5월 제4기 이사장 남성걸이 취임했다.'],
         miles: [['2003.08','법인 여름 회원 수련회'],['2004.08','직원 연수 \'촌놈들의 우주찾기\' (무주 구천동)'],['2004.12','사랑의 연탄나눔운동 대구지부 활동 시작'],['2005.05','제4기 이사장 남성걸 취임'],]
       },
       { id: 6, year: '2005', period: '2005.06 — 2011.10', name: '원대동', shortName: '원대동',
-        photos: [{src:'https://lh3.googleusercontent.com/d/1dd8j06laXFbbT--HX8Vb8DlA1ncZirDS',caption:'2005.06 원대동 이전 개소'},{src:'https://lh3.googleusercontent.com/d/11WtMm5CGFnP2kM6SQ84jZfV0sIxBb6nm',caption:'2008.01 태안 기름유출 자원봉사'},{src:'https://lh3.googleusercontent.com/d/1Ju4rY2agm6oVvvKtwjpGXT7_uZ-_-VUa',caption:'2009.01 직원 동계연수'}],
+        photos: [{src:'https://lh3.googleusercontent.com/d/1v4VWcQ85F7WHzKQdvX6-a1HgGVPlu4V8',caption:'2005.06 원대동 이전 개소'},{src:'https://lh3.googleusercontent.com/d/11WtMm5CGFnP2kM6SQ84jZfV0sIxBb6nm',caption:'2008.01 태안 기름유출 자원봉사'},{src:'https://lh3.googleusercontent.com/d/1Ju4rY2agm6oVvvKtwjpGXT7_uZ-_-VUa',caption:'2009.01 직원 동계연수'}],
         addr: '대구 서구 원대3가 1271-6',
-        lat: 35.8856, lng: 128.5754,
+        lat: 35.8851, lng: 128.5735,
         story: ['6년간 안정적인 거점을 확보하며 법인의 황금기를 보낸 곳이다. 태안 자원봉사, 해외연수, 후원의 밤 등 굵직한 행사들이 이어졌다.'],
         miles: [['2005.06','원대동 이전 개소'],['2005.10','이전식 · 제4기 이사회 출범'],['2006.05','법인설립기념일 직원단합대회'],['2006.09','직원 상조회 결성'],['2007.01','소식지 『촌놈들이 일구어가는 복지공동체』 발간'],['2007.10','연탄지원 경북·북녘으로 확대 (따뜻한 한반도 모범사례)'],['2008.01','태안 기름 유출 현장 전 직원 자원봉사'],['2008.07','제5기 이사장 김선 취임'],['2009.01','직원 동계연수 \'우리가 가야할 길\''],['2009.10','직원 해외연수 (일본)'],['2010.04','아카데미 \'나눔의 가치를 실현하는 삶과 철학\''],['2010.05','후원의 밤'],['2010.08','하계 직원연수 \'꿈꾸는 자가 주인공이다\' (군위)'],['2010.10','직원 미디어 교육'],['2010.10','제1회 무지개가족운동회'],['2009.12','음악이 있는 송년의 밤'],['2011.01','직원 동계연수 \'홈리스법안 제정 현황\''],['2011.02','제6기 이사장 김영달 취임'],['2011.10','필리핀 해외연수']]
       },
       { id: 7, year: '2011', period: '2011.11 — 2014.05', name: '평리동', shortName: '평리동',
         photos: [{src:'https://lh3.googleusercontent.com/d/1IO3QZ1QWA0XMCshjdYHF0IehZI4EPSXY',caption:'2011.11 산하기관 통합 이전 개소식'},{src:'https://lh3.googleusercontent.com/d/17CVnrFzt7MQRtj1l6RNuXISE9jUq2_2L',caption:'2011.12 법인 15주년 기념 사업보고회'}],
         addr: '대구 서구 평리동 617-7',
-        lat: 35.8731, lng: 128.5547,
+        lat: 35.8767, lng: 128.5545,
         story: ['2011년 11월, 법인·쪽방상담소·도서관을 한 건물로 통합 이전했다. 제6기 이사장 김영달이 취임하며 새로운 출발을 알렸다.'],
         miles: [['2011.10','홈페이지 통합 개편'],['2011.11','산하기관 통합 이전 개소식'],['2011.12','법인 15주년 기념 사업보고회 \'시간을 모아, 역사를 쓰다\'']]
       },
       { id: 8, year: '2014', period: '2014.06 — 현재', name: '희망드림센터',
         photos: [{src:'https://lh3.googleusercontent.com/d/1xOtmDo2LUb463YttYGtX0rcfSmK3uAd2',caption:'2014.06 희망드림센터 개소식'},{src:'https://lh3.googleusercontent.com/d/1XJbxwAlPZzXj-3t7VyUFMhtHY30GwDuA',caption:'2020.07 코로나19 백서 발간'},{src:'https://lh3.googleusercontent.com/d/14bozhINggrB5HUyZ51U78eqzUy2DWuxq',caption:'2021.12 공영장례 제도 도입 토론회'}],
         addr: '대구 서구 문화로 47길 13-3',
-        lat: 35.8728, lng: 128.5540,
+        lat: 35.8769, lng: 128.5575,
         story: ['2014년 6월, 직원과 주민이 함께 공사한 자체 건물 희망드림센터에 입주했다. 법인 역사상 처음으로 우리 건물이 생긴 날이었다.', '이후 대외협력위원회 신설, 코로나19 대응, 공영장례 제도화 운동 등 법인의 사회적 역할이 더욱 확장됐다.'],
         miles: [['2014.06','희망드림센터 개소 (법인 최초 자체 건물)'],['2016.01','법인 설립 20주년'],['2016.03','20주년 기념 자원봉사아카데미'],['2017.06','대외협력위원회 신설 및 발대식'],['2017.07','제7기 이사장 신경목 취임'],['2017.11','위풍당당 콘서트 (공감·경산이주민센터 공동)'],['2018.05','자원봉사아카데미 \'시민참여와 선거자원봉사의 의미\''],['2019.03','대구사회주택세미나'],['2019.06','희망드림센터 5주년 기념식'],['2020.02','코로나19 예방·확산방지 집중 업무'],['2020.05','코로나19 긴급재난 빈곤층 생존권 보장 토론회'],['2020.07','코로나19 백서 발간'],['2020.12','가족친화인증기업 선정'],['2021.12','공영장례 제도 도입 토론회'],['2024.03','제8기 이사장 박종률 취임'],['2024.10','고베 재일동포 역사 박물관 건립 후원 사진전'],['2025.03','경북 북부 산불피해 구호물품 전달'],['2026.01','법인 설립 30주년'],['2026.03','법인 사무처 조직 개편']]
       }
@@ -1031,12 +1031,12 @@ const ORGS = [
       { id: 1, year: '2001', period: '2001.02 — 2003.05', name: '칠성동', shortName: '칠성동',
         photos: [{src:'https://lh3.googleusercontent.com/d/1X1eabuh3ufITliNSZhBp8CzHRBGGZNds',caption:'2001.02 대구쪽방상담소 개소식'},{src:'https://lh3.googleusercontent.com/d/1Su9LhOhLYz4SuaRWtPOAu1tIXr8IRYzA',caption:'2001.03 밑반찬 지원사업 시작'},{src:'https://lh3.googleusercontent.com/d/1lxfIhYCQlNF6hfH4WhISc8n38HiK3Rvu',caption:'2002.01 나눔의집 운영'}],
         addr: '대구 북구 칠성2가 302-273 (노숙인종합지원센터 내)',
-        lat: 35.8782, lng: 128.6020,
+        lat: 35.8752, lng: 128.6002,
         story: ['2001년 2월 24일 보건복지부 지정 부설 대구쪽방상담소가 노숙인종합지원센터 한 켠에서 문을 열었다. 같은 해 밑반찬 지원, 한가위 행사, 장기·바둑대회를 시작하며 쪽방주민의 일상을 챙기는 사업의 틀을 잡았다.', '이듬해 봄 동대구역 광장에서 무료급식을 시작했고, 6월부터는 인의협과 함께 거리진료도 진행했다.'],
         miles: [['2001.02','대구쪽방상담소 개소 (보건복지부 지정)'],['2003.02','대구 24개 동사무소 연계 쪽방주민 전수조사'],['2001.03','밑반찬 지원사업 시작'],['2001.09','한가위 특별지원 · 장기바둑대회'],['2002.01','나눔의집 운영'],['2002.02','쪽방 첫 설 명절 합동 차례상'],['2002.04','동대구역 노숙인·쪽방주민 무료급식 시작'],['2002.06','인의협 거리진료 시작'],['2002.07','쪽방상담소 소식지 창간'],['2002.10','노숙인지원 자원활동가 훈련캠프 (팔공산)'],]
       },
       { id: 3, year: '2005', period: '2005.06 — 2011.10', name: '원대동', shortName: '원대동',
-        photos: [{src:'https://lh3.googleusercontent.com/d/1v4VWcQ85F7WHzKQdvX6-a1HgGVPlu4V8',caption:'원대동 이전 개소'},{src:'https://lh3.googleusercontent.com/d/1ZCJlBMarNVdBuDT0i_KvD7XWQYDDOHJM',caption:'2009.12 쪽방거주인 실태조사 보고회'},{src:'https://lh3.googleusercontent.com/d/1JvY4HUNnP7eYurrBNy_qIrlFdSYJcukV',caption:'2010.04 새오름고용지원센터 개소'}],
+        photos: [{src:'https://lh3.googleusercontent.com/d/1v4VWcQ85F7WHzKQdvX6-a1HgGVPlu4V8',caption:'2005.06 원대동 이전 개소'},{src:'https://lh3.googleusercontent.com/d/1ZCJlBMarNVdBuDT0i_KvD7XWQYDDOHJM',caption:'2009.12 쪽방거주인 실태조사 보고회'},{src:'https://lh3.googleusercontent.com/d/1JvY4HUNnP7eYurrBNy_qIrlFdSYJcukV',caption:'2010.04 새오름고용지원센터 개소'}],
         addr: '대구 서구 원대3가 1271-6',
         lat: 35.8856, lng: 128.5754,
         story: ['원대동 시기는 쪽방상담소의 가장 활발한 확장기였다. 다양한 프로그램과 조사 사업이 쏟아졌고, 주민 자조모임 \'희망회\'가 탄생했다.'],
@@ -1066,35 +1066,35 @@ const ORGS = [
     places: [
       { id: 1, year: '2004', period: '2004.05 — 2008.12', name: '적십자병원', shortName: '적십자병원',
         photos: [{src:'https://lh3.googleusercontent.com/d/1EyOLkGnIc1HgYNlQY7QCHD_I2gvhXSsC',caption:'2004.05 쪽방·노숙인 무료진료소 개소'},{src:'https://lh3.googleusercontent.com/d/1nXXu9eLCmtcSm7yQGI7JP1--7kPkZNCA',caption:'2007.03 의료지원사업 평가·보고회'}],
-        addr: '대구 중구 (적십자병원 6층)',
-        lat: 35.8700, lng: 128.5980,
+        addr: '대구 중구 남산2동 937-1 (적십자병원 6층)',
+        lat: 35.8700, lng: 128.5965,
         story: ['2004년 5월 24일, 상근 간호사를 배치한 쪽방·노숙인 무료진료소를 개소했다. 인의협 의사들이 매주 진료를 맡았다.', '전국 최초의 쪽방·노숙인 전용 상설 무료진료소로, 동대구역 거리진료와 병행 운영됐다.'],
         miles: [['2004.05','쪽방·노숙인 무료진료소 개소'],['2007.03','의료지원사업 평가·보고회 (적십자병원 지하강당)']]
       },
       { id: 2, year: '2008', period: '2008.12 — 2011.03', name: 'M병원',
-        addr: '대구 (위치 확인 중)',
-        lat: 35.8750, lng: 128.5800,
+        addr: '대구 북구 팔달로 147',
+        lat: 35.8891, lng: 128.5664,
         story: ['안정적인 진료 운영을 위해 M병원으로 이전하여 운영을 이어갔다.'],
         miles: [['2008.12','M병원 이전 개소']]
       },
       { id: 3, year: '2011', period: '2011.03 — 2014.11', name: '광개토병원',
         photos: [{src:'https://lh3.googleusercontent.com/d/1B5FTBJovvEMqubuKl-stkaUi3Vvj6y91',caption:'2011.03 광개토병원 이전 개소'}],
-        addr: '대구 서구 일대',
-        lat: 35.8790, lng: 128.5620,
+        addr: '대구 중구 중앙대로 366',
+        lat: 35.8660, lng: 128.5938,
         story: ['2011년 3월 광개토병원으로 이전했다. 폭염 쪽방재가방문 봉사단과 연계하며 의료 지원 범위를 넓혔다.'],
         miles: [['2011.03','광개토병원 이전 개소'],['2011.06','폭염대책 쪽방재가방문 봉사단 연계']]
       },
       { id: 4, year: '2014', period: '2014.11 — 2025.03', name: '곽병원', shortName: '곽병원',
         photos: [{src:'https://lh3.googleusercontent.com/d/1B9odQAwqn79wq6TysSAnSyo4wY9DrkSD',caption:'2014.11 대구희망진료소로 재편 개소'},{src:'https://lh3.googleusercontent.com/d/1sBloLqFp_RKUkwGBlR53rqZOnmlrJfJQ',caption:'2014.11 대구희망진료소로 재편 개소'}],
         addr: '대구 중구 국채보상로 531 (곽병원 별관 2층)',
-        lat: 35.8676, lng: 128.5941,
+        lat: 35.8707, lng: 128.5887,
         story: ['2014년 11월 18일 쪽방·노숙 통합 무료진료소 \'대구희망진료소\'로 재편 개소했다. 경북대병원과의 협진 체계를 구축하며 전문 진료 접근성을 높였다.'],
         miles: [['2014.11','\'대구희망진료소\'로 재편 개소'],['2017.10','경북대학교 병원 업무협약 체결']]
       },
       { id: 5, year: '2025', period: '2025.04 — 현재', name: '행복나눔의집', shortName: '행복나눔의집',
         photos: [{src:'https://lh3.googleusercontent.com/d/1-uA5bSAQAEcD_q9RmmYLoaiesBuIZg5a',caption:'2025.04 행복나눔의집 2층으로 이전'}],
         addr: '대구 중구 서성로16길 53 (행복나눔의집 2층)',
-        lat: 35.8754, lng: 128.5894,
+        lat: 35.8734, lng: 128.5906,
         story: ['공중보건의 미배치 사태에 대응하여 행복나눔의집 2층으로 이전했다. 중구 쪽방 밀집지역과 더 가까운 위치에서 통합 행정·사례관리에 주력하고 있다.'],
         miles: [['2025.04','행복나눔의집 2층으로 이전']]
       }
@@ -1109,7 +1109,7 @@ const ORGS = [
       { id: 1, year: '2017', period: '2017.08 — 현재', name: '행복나눔의집',
         photos: [{src:'https://lh3.googleusercontent.com/d/1X8df-qnmPM8YdXYYKcUx4bfRAyeEuVDE',caption:'2017.08 행복나눔의집 개소 (대구시 민간위탁)'},{src:'https://lh3.googleusercontent.com/d/1xtw8az-bZXKFEp0OvlPQYz5p9FsZR_GF',caption:'2023.12 원예수업 성과물 전시회 만남의바램'},{src:'https://lh3.googleusercontent.com/d/1DHkbrxyt2rDKCbSanXL4FjjMT1CWsY7-',caption:'2025.06 대쪽진단 2차 보고대회 기후위기 속 대구쪽방'}],
         addr: '대구 중구 서성로16길 53',
-        lat: 35.8754, lng: 128.5894,
+        lat: 35.8734, lng: 128.5906,
         story: ['2017년 8월 대구시 민간위탁 시설로 정식 개소했다. 주민 자체 모임 \'희망디딤돌\'이 조직되며 당사자 참여형 복지의 모델을 만들어가고 있다.', '업사이클링 밴드, 원예수업, 도시재생 사업 등 주민의 일상과 문화를 함께 채워가는 공간으로 자리잡았다.'],
         miles: [['2017.08','행복나눔의집 개소 (대구시 민간위탁)'],['2018.01','주민 자체 모임 \'희망디딤돌\' 시작'],['2022.06','북성로 도시재생뉴딜 주민제안 공모사업 선정'],['2022.11','쪽방주민 업사이클링밴드 \'북성로 사운즈업\' 공유회'],['2023.12','원예수업 성과물 전시회 \'만남의바램\''],['2025.06','대쪽진단 2차 보고대회 기후위기 속 대구쪽방, 이대로 괜찮은가']]
       }
@@ -1147,9 +1147,9 @@ const ORGS = [
         story: ['대구시 민간위탁으로 전환되며 행복나눔의집 2층으로 이전했다. 사랑의집수리, 비주택 거주자 지원 등 사업 범위가 확장됐다.'],
         miles: [['2017.01','대구시 민간위탁 전환'],['2018.04','\'사랑의집수리\' 사업 시작'],['2021.03','비주택 거주자 주거지원사업 수행'],['2021.05','대구경북 비주택거주자 이주정착지원사업'],['2022.09','㈜해비치와 주거환경개선 사업 협약']]
       },
-      { id: 5, year: '2023', period: '2023.03 — 현재', name: '남구 대명동',
-        addr: '대구 남구 대명동 일대 (위치 확인 중)',
-        lat: 35.8520, lng: 128.5900,
+      { id: 5, year: '2023', period: '2023.03 — 현재', name: '대명동',
+        addr: '대구 남구 명덕로 104 전문관 307호',
+        lat: 35.8536, lng: 128.5797,
         story: ['대구도시개발공사 공공위탁으로 전환되며 새로운 거점에서 사업을 이어가고 있다. 돌봄 대상 가구를 위한 일상안심공간 조성 사업이 시작됐다.'],
         miles: [['2023.03','대구도시개발공사 공공위탁 전환'],['2026.03','일상안심공간 조성지원 사업 시작']]
       }
@@ -1161,16 +1161,16 @@ const ORGS = [
     sub: '달서구청 위탁',
     period: '2021 — 현재',
     places: [
-      { id: 1, year: '2021', period: '2021.04 — 2022', name: '달서구', shortName: '달서구',
+      { id: 1, year: '2021', period: '2021.04 — 2022', name: '월성동', shortName: '달서구',
         photos: [{src:'https://lh3.googleusercontent.com/d/1Sp6EtXDEBdXhncEpNslGySIOQ1d7rUfM',caption:'2021.04 달서주거복지센터 개소식'}],
-        addr: '대구 달서구 일대 (월성주공단지 인근)',
-        lat: 35.8295, lng: 128.5328,
+        addr: '대구 달서구 월성동 86 (월성주공2단지아파트 내)',
+        lat: 35.8296, lng: 128.5284,
         story: ['2021년 4월 14일, 전국 구·군 단위 최초 주거복지 전담기관으로 개소식을 열었다. 달서구 거주 주거취약계층을 위한 맞춤형 지원이 시작됐다.'],
         miles: [['2021.04','달서주거복지센터 개소 (전국 구·군 최초)']]
       },
-      { id: 2, year: '2023', period: '2023 — 현재', name: '송현희망드림센터',
-        addr: '대구 달서구 송현동 일대 (위치 확인 중)',
-        lat: 35.8320, lng: 128.5280,
+      { id: 2, year: '2023', period: '2023 — 현재', name: '송현희망센터',
+        addr: '대구 달서구 중흥로 5안길 7 (송현희망센터) 3층',
+        lat: 35.8292, lng: 128.5546,
         story: ['송현희망드림센터로 이전하며 달서구 주거취약계층을 위한 지원 사업을 이어가고 있다.'],
         miles: [['2023.01','달청 희망-ON 주거지원사업 시작'],['2026.01','주거권 인식향상 사업 시작']]
       }
@@ -1207,7 +1207,7 @@ const ORGS = [
       { id: 1, year: '2009', period: '2009.08 — 2011.10', name: '원대동', shortName: '원대동',
         photos: [{src:'https://lh3.googleusercontent.com/d/1wZ1_B56Fie0WJLc_VDLPxiITfqatdwoh',caption:'2009.08 만평주민도서관 개소'},{src:'https://lh3.googleusercontent.com/d/1_eFkwLsTiwFNES3Kya8C1ikTPydfKnkP',caption:'2010.01 독서논술교실 시작'},{src:'https://lh3.googleusercontent.com/d/1iP3bwk583SamUwyTMxSON_7ADKs0gnvB',caption:'2010.07 여름방학 씨앗학교 시작'}],
         addr: '대구 서구 원대3가 1271-6 (법인 건물 3층)',
-        lat: 35.8856, lng: 128.5754,
+        lat: 35.8859, lng: 128.5705,
         story: ['2009년 8월 18일, 정용태 관장과 함께 지역주민 문화·소통 공간으로 문을 열었다. 독서논술교실과 씨앗학교가 대표 프로그램으로 자리잡았다.'],
         miles: [['2009.08','만평주민도서관 개소 (초대 관장 정용태)'],['2010.01','독서논술교실 시작'],['2010.07','여름방학 \'씨앗학교\' 시작']]
       },
@@ -1236,7 +1236,7 @@ const ORGS = [
       { id: 1, year: '2002', period: '2002 — 2008.12', name: '팔공정보문화센터', shortName: '팔공정보문화센터',
         photos: [{src:'https://lh3.googleusercontent.com/d/1JExNUwEhqlAUQNnEHvn5PB9JW15Wpz_o',caption:'2002.03 2002 월드컵 성공개최 기원'},{src:'https://lh3.googleusercontent.com/d/1_ae_ru8p-Zgj7PsgkOQQbFAleVOdyCHp',caption:'2007.06 자원봉사 기초교육 및 웃음프로그램'}],
         addr: '대구 동구 효목2동 400-1 (팔공정보문화센터 1층)',
-        lat: 35.8762, lng: 128.6296,
+        lat: 35.8751, lng: 128.6345,
         story: ['팔공정보문화센터 1층에 자리잡으며 월드컵 자원봉사 캠페인, 청소년 해외봉사 등 굵직한 사업을 이끌었다.', '2004년·2007년 재수탁에 성공하며 8년간 안정적으로 운영하다 2009년 사단법인으로 독립했다.'],
         miles: [['2002.03','월드컵 성공개최 기원 봄 조성 사업'],['2002.05','1경로당 1어린이집 결연맺기 프로그램'],['2003.04','대구하계U대회 성공개최 캠페인'],['2004.07','재수탁 확정 (1회차)'],['2006.07','제1회 웃음프로그램'],['2007.01','재수탁 확정 (2회차)'],['2010.04','청소년 해외자원봉사단 (캄보디아)'],['2009.01','사단법인 동구자원봉사센터로 독립']]
       }
@@ -1575,7 +1575,15 @@ function App() {
   // Init map
   useEffect(() => {
     if (mapInstance.current) return;
-    mapInstance.current = L.map(mapRef.current, { center:[35.8714,128.6014], zoom:12, zoomControl:true, attributionControl:true, preferCanvas:true, wheelPxPerZoomLevel:140, zoomSnap:1, zoomDelta:1, scrollWheelZoom:true });
+    mapInstance.current = L.map(mapRef.current, { center:[35.859,128.582], zoom:11, zoomControl:true, attributionControl:true, preferCanvas:true, wheelPxPerZoomLevel:140, zoomSnap:1, zoomDelta:1, scrollWheelZoom:true });
+      // 전체 마커가 한눈에 보이게 초기 뷰 자동 조정
+      setTimeout(()=>{
+        const map = mapInstance.current; if(!map) return;
+        const initOrg = ORGS[0];
+        const initCoords = initOrg.places.map(p=>[p.lat,p.lng]);
+        const bounds = L.latLngBounds(initCoords);
+        map.fitBounds(bounds, {padding:[60,60], maxZoom:13});
+      }, 100);
     if(window.innerWidth<=820){
       setTimeout(()=>{
         const map=mapInstance.current; if(!map) return;
